@@ -87,4 +87,4 @@ class BaseModel:
         the model storage
         """
 
-        models.storage.delete(self) 
+        models.storage.delete(self)
