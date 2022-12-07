@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-""" Amenity Module for HBNB project """
+"""This is the amenity class"""
 from models.base_model import BaseModel, Base
 from os import getenv
 from sqlalchemy import Column, Table, String, ForeignKey
 from sqlalchemy.orm import relationship
-
 
 place_amenity = Table("place_amenity", Base.metadata,
                       Column("place_id", String(60),
@@ -22,11 +21,10 @@ class Amenity(BaseModel, Base):
         place_amenities (relationship): The Place - Amenity relationship.
     """
 
+    __tablename__ = "amenities"
 
-__tablename__ = "amenities"
-
-if getenv('HBNB_TYPE_STORAGE') == 'db':
-    name = Column(String(128), nullable=False)
-    place_amenities = relationship('Place', secondary=place_amenity)
-else:
-    name = ''
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
+        name = Column(String(128), nullable=False)
+        place_amenities = relationship('Place', secondary=place_amenity)
+    else:
+        name = ''
