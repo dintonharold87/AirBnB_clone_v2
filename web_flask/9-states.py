@@ -9,22 +9,22 @@ app = Flask(__name__)
 
 
 @app.route('/states', strict_slashes=False)
+def states():
+    """Display a HTML page of all States"""
+    states = storage.all(State).values()
+    return render_template('7-states_list.html', states=states)
+
 @app.route('/states/<id>', strict_slashes=False)
-def states_1(id=None):
-    """Returns a rendered html template:
-    if id is given, list the cities of that State
-    else, list all States
-    """
-    states = storage.all('State')
-    if id:
-        key = '{}.{}'.format('State', id)
-        if key in states:
-            states = states[key]
-        else:
-            states = None
-    else:
-        states = storage.all('State').values()
-    return render_template('9-states.html', states=states, id=id)
+def get_state_by_uuid(id):
+    """Display a HTML page of a State and their cities"""
+    states = storage.all(State).values()
+
+    for state in states:
+        if id == state.id:
+            return render_template('9-states.html', 
+                    state=state, state_cities=state.cities)
+
+    return render_template('9-states.html', not_found=True)
 
 
 @app.teardown_appcontext
