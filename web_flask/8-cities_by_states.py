@@ -13,8 +13,14 @@ def cities():
     """Returns a rendered html template
     at the /cities_by_states route,
     listing the cities by states"""
+    states = storage.all(State).values()
+    cities = list()
+    for state in states:
+        for city in state.cities:
+            cities.append(city)
+
     return render_template('8-cities_by_states.html',
-                           states=storage.all('State').values())
+                           states=states, state_cities=cities)
 
 
 @app.teardown_appcontext
