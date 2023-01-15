@@ -22,8 +22,8 @@ def get_state_by_uuid(id):
 
     for state in states:
         if id == state.id:
-            return render_template('9-states.html', 
-                    state=state, state_cities=state.cities)
+            return render_template('9-states.html',
+                                   state=state, state_cities=state.cities)
 
     return render_template('9-states.html', not_found=True)
 
