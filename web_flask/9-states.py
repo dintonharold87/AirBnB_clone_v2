@@ -14,6 +14,7 @@ def states():
     states = storage.all(State).values()
     return render_template('7-states_list.html', states=states)
 
+
 @app.route('/states/<id>', strict_slashes=False)
 def get_state_by_uuid(id):
     """Display a HTML page of a State and their cities"""
@@ -31,6 +32,7 @@ def get_state_by_uuid(id):
 def teardown(self):
     """Removes the current SQLAlchemy Session"""
     storage.close()
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
